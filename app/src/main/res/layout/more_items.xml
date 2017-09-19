@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.adrian.tenminutesapp.pages.home.viewmodel.HomePageViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@{viewModel.menuA  ? @color/item_added : @color/item_not_added}"
+                android:onClick="@{viewModel::onClickMenuA}"
+                android:text="Menu A, (+900)"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:layout_margin="4dp"
+                android:textSize="12sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@{viewModel.menuB  ? @color/item_added : @color/item_not_added}"
+                android:onClick="@{viewModel::onClickMenuB}"
+                android:text="Menu B, (+1090)"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:layout_margin="4dp"
+                android:textSize="12sp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@{viewModel.flavoredDressing ? @color/item_added : @color/item_not_added}"
+                android:onClick="@{viewModel::onClickFlavoredDressing}"
+                android:text="Flavored Dressing, (+100)"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:layout_margin="4dp"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
