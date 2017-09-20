@@ -1,5 +1,6 @@
 package com.adrian.tenminutesapp.pages.home.di
 
+import android.content.SharedPreferences
 import com.adrian.tenminutesapp.pages.home.model.HomePageModel
 import com.adrian.tenminutesapp.pages.home.service.HomePageService
 import com.adrian.tenminutesapp.pages.home.view.HomePageActivity
@@ -26,7 +27,8 @@ class HomePageModule {
 
     @ActivityScope
     @Provides
-    fun providesHomePageModel(homePageService: HomePageService) = HomePageModel(homePageService)
+    fun providesHomePageModel(homePageService: HomePageService, sharedPreferences: SharedPreferences)
+            = HomePageModel(homePageService, sharedPreferences)
 
     @ActivityScope
     @Provides

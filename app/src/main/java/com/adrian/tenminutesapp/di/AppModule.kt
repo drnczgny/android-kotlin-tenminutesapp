@@ -1,8 +1,11 @@
 package com.adrian.tenminutesapp.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import com.adrian.tenminutesapp.MyApplication
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -14,6 +17,12 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideContext(myApplication: MyApplication) = myApplication
+    @Named("ApplicationContext")
+    fun provideContext(myApplication: MyApplication): Context = myApplication
 
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(@Named("ApplicationContext") context: Context): SharedPreferences {
+        return context.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
+    }
 }

@@ -1,14 +1,16 @@
 package com.adrian.tenminutesapp.pages.home.model
 
-import com.adrian.tenminutesapp.pages.home.service.HomePageService
+import android.content.SharedPreferences
 import com.adrian.tenminutesapp.pages.home.dto.CostItem
 import com.adrian.tenminutesapp.pages.home.dto.CostRegistry
+import com.adrian.tenminutesapp.pages.home.service.HomePageService
+
 
 /**
  * Created by cadri on 2017. 09. 19..
  */
 
-class HomePageModel constructor(val homePageService: HomePageService) {
+class HomePageModel constructor(val homePageService: HomePageService, val sharedPreferences: SharedPreferences) {
 
     var balance: Long = 10000
 
@@ -17,7 +19,6 @@ class HomePageModel constructor(val homePageService: HomePageService) {
     val menuACostItem: CostItem = CostItem("Menu A", 900)
     val menuBCostItem: CostItem = CostItem("Menu B", 1090)
     val flavoredDressingItem: CostItem = CostItem("Flavored dressing", 100)
-
 
     fun addMenuAItem() {
         costRegistry.add(menuACostItem)
@@ -43,12 +44,15 @@ class HomePageModel constructor(val homePageService: HomePageService) {
         costRegistry.remove(flavoredDressingItem)
     }
 
-//    fun addCost(cost: Long) {
-//        balance -= cost
-//    }
-//
-//    fun uploadBalance(newBalance: Long) {
-//        balance = newBalance
-//    }
+    fun saveBalance(balance: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString("BALANCE", balance)
+        editor.commit()
+    }
+
+    fun findBalance(): String {
+        return sharedPreferences.getString("BALANCE", "")
+    }
+
 
 }

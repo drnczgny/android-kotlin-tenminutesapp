@@ -20,7 +20,7 @@ class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val mode
     }
 
     @Bindable
-    var balance: Long = model.balance
+    var balance: Long = 0
         set(value) {
             if (balance != value) {
                 field = value
@@ -32,22 +32,11 @@ class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val mode
     var cost: String = ""
         set(value) {
             if (cost != value) {
-//                if (cost.equals("")) {
-//                    notifySumCost(0)
-//                } else {
-//                    notifySumCost(cost.toLong().times(-1))
-//                }
                 field = value
                 notifyPropertyChanged(BR.cost)
                 notifySumCost()
-//                if (cost.equals("")) {
-//                    notifySumCost(0)
-//                } else {
-//                    notifySumCost(cost.toLong())
-//                }
             }
         }
-
 
     @Bindable
     var sumCost: String = ""
@@ -103,6 +92,14 @@ class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val mode
             }
         }
 
+    fun onCreate() {
+        balance = if (!model.findBalance().equals("")) {
+            model.findBalance().toLong()
+        } else {
+            0.toLong()
+        }
+    }
+
     fun onClickAdd(view: View) {
         Log.e(logging.TAG, "onClickAdd...");
         if (!sumCost.equals("")) {
@@ -154,12 +151,15 @@ class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val mode
 
     private fun addNewCost(cost: Long) {
         balance -= cost
+        model.saveBalance(balance.toString())
     }
 
     private fun uploadBalance(uploadBalanceAmount: Long) {
         var discount = uploadBalanceAmount / 10
         var uploadAmountWithDiscount = uploadBalanceAmount + discount
         this.balance += uploadAmountWithDiscount
+
+        model.saveBalance(balance.toString())
     }
 
     private fun notifyWhenAddOrRemoveItem() {
@@ -172,9 +172,8 @@ class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val mode
         notifySumCost()
     }
 
-
     private fun notifySumCost() {
-        var currentCost = if (! cost.equals("")) {
+        var currentCost = if (!cost.equals("")) {
             cost.toLong()
         } else {
             0
@@ -198,5 +197,14 @@ class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val mode
         menuB = false;
         flavoredDressing = false
         model.costRegistry.costItems.clear()
+    }
+
+    fun setupBalance(newBalance: String) {
+        balance = if (!newBalance.equals("")) {
+            newBalance.toLong()
+        } else {
+            0.toLong()
+        }
+        model.saveBalance(balance.toString())
     }
 }

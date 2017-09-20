@@ -21,7 +21,7 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:background="@{viewModel.menuA  ? @color/item_added : @color/item_not_added}"
                 android:onClick="@{viewModel::onClickMenuA}"
                 android:text="Menu A, (+900)"
@@ -32,7 +32,7 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:background="@{viewModel.menuB  ? @color/item_added : @color/item_not_added}"
                 android:onClick="@{viewModel::onClickMenuB}"
                 android:text="Menu B, (+1090)"
@@ -43,7 +43,7 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="40dp"
                 android:background="@{viewModel.flavoredDressing ? @color/item_added : @color/item_not_added}"
                 android:onClick="@{viewModel::onClickFlavoredDressing}"
                 android:text="Flavored Dressing, (+100)"
