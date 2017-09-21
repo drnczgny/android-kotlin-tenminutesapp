@@ -6,17 +6,23 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.adrian.tenminutesapp.BR
 import com.adrian.tenminutesapp.R
 import com.adrian.tenminutesapp.databinding.FragmentHomePageBinding
+import com.adrian.tenminutesapp.pages.home.viewmodel.HomePageViewModel
+import dagger.android.support.AndroidSupportInjection
+import javax.inject.Inject
 
 
-class HomePageFragment : Fragment() {
+class HomePageFragment : Fragment(), HomePageRouter {
 
     object logging {
         val TAG = HomePageFragment::class.java.simpleName
     }
 
     lateinit var binding: FragmentHomePageBinding
+
+    @Inject lateinit var viewModel: HomePageViewModel
 
     companion object {
         fun newInstance(): HomePageFragment {
@@ -27,23 +33,37 @@ class HomePageFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        AndroidSupportInjection.inject(this)
+        AndroidSupportInjection.inject(this)
+
+        viewModel.onCreate()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bind(inflater, container)
+
+        setUpuploadBalanceOnLongClickListener()
         return binding.getRoot()
     }
+
     private fun bind(inflater: LayoutInflater?, container: ViewGroup?) {
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-//        binding?.viewModel = viewModel as DefaultAddCostRegistryPageViewModel
+        binding?.viewModel = viewModel as HomePageViewModel
         binding?.executePendingBindings()
+    }
+
+    private fun setUpuploadBalanceOnLongClickListener() {
+        binding.uploadBalance.setOnLongClickListener(object : View.OnLongClickListener {
+            override fun onLongClick(p0: View?): Boolean {
+                viewModel.setupBalance(binding?.uploadBalanceAmount.text.toString());
+                return true
+            }
+        })
     }
 
     private fun getLayoutId() = R.layout.fragment_home_page
 
-//    private fun getVariableId(): Int {
-//        return BR.viewModel
-//    }
+    private fun getVariableId(): Int {
+        return BR.viewModel
+    }
 
 }

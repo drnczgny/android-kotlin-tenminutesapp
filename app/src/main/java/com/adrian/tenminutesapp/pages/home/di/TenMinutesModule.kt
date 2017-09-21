@@ -1,8 +1,5 @@
 package com.adrian.tenminutesapp.pages.home.di
 
-import android.content.SharedPreferences
-import com.adrian.tenminutesapp.pages.home.model.HomePageModel
-import com.adrian.tenminutesapp.pages.home.service.HomePageService
 import com.adrian.tenminutesapp.pages.home.view.TenMinutesActivity
 import com.adrian.tenminutesapp.pages.home.view.TenMinutesRouter
 import com.adrian.tenminutesapp.pages.home.viewmodel.TenMinutesViewModel
@@ -23,15 +20,6 @@ class TenMinutesModule {
 
     @ActivityScope
     @Provides
-    fun providesTenMinutesService() = HomePageService()
-
-    @ActivityScope
-    @Provides
-    fun providesTenMinutesModel(homePageService: HomePageService, sharedPreferences: SharedPreferences)
-            = HomePageModel(homePageService, sharedPreferences)
-
-    @ActivityScope
-    @Provides
-    fun providesTenMinutesViewModel(tenMinutesRouter: TenMinutesRouter, homePageModel: HomePageModel)
-            = TenMinutesViewModel(tenMinutesRouter, homePageModel)
+    fun providesTenMinutesViewModel(tenMinutesRouter: TenMinutesRouter)
+            = TenMinutesViewModel(tenMinutesRouter)
 }

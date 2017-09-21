@@ -9,10 +9,10 @@ import dagger.android.ContributesAndroidInjector
  * Created by cadri on 2017. 09. 21..
  */
 @Module
-abstract class HomePageActivityFragmentBuilderModule {
+abstract class TenMinutesActivityFragmentBuilderModule {
 
     @FragmentScope
-    @ContributesAndroidInjector(modules = arrayOf(HomePageFragmentModule::class))
+    @ContributesAndroidInjector(modules = arrayOf(HomePageModule::class))
     abstract fun bindHomePageFragment(): HomePageFragment
 
 //    @FragmentScope

@@ -1,5 +1,6 @@
 package com.adrian.tenminutesapp.di
 
+import com.adrian.tenminutesapp.pages.home.di.TenMinutesActivityFragmentBuilderModule
 import com.adrian.tenminutesapp.pages.home.di.TenMinutesModule
 import com.adrian.tenminutesapp.pages.home.view.TenMinutesActivity
 import com.adrian.tenminutesapp.scope.ActivityScope
@@ -14,6 +15,6 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuilderModule {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(TenMinutesModule::class))
+    @ContributesAndroidInjector(modules = arrayOf(TenMinutesModule::class, TenMinutesActivityFragmentBuilderModule::class))
     abstract fun bindHomePageActivity(): TenMinutesActivity
 }

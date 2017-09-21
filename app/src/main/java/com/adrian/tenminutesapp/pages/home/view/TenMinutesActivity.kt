@@ -4,7 +4,6 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import com.adrian.tenminutesapp.R
 import com.adrian.tenminutesapp.databinding.ActivityTenMinutesBinding
 import com.adrian.tenminutesapp.pages.home.viewmodel.TenMinutesViewModel
@@ -33,7 +32,6 @@ class TenMinutesActivity : AppCompatActivity(), TenMinutesRouter, HasSupportFrag
         return fragmentDispatchingAndroidInjector
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,17 +40,22 @@ class TenMinutesActivity : AppCompatActivity(), TenMinutesRouter, HasSupportFrag
 
         viewModel.onCreate()
 
-        setUpuploadBalanceOnLongClickListener()
+//        setUpuploadBalanceOnLongClickListener()
+
+        var mFragmentManager = supportFragmentManager
+        var mFragmentTransaction = mFragmentManager.beginTransaction()
+        mFragmentTransaction.replace(binding.contentFrame.id, HomePageFragment.newInstance())
+        mFragmentTransaction.commit()
     }
 
-    private fun setUpuploadBalanceOnLongClickListener() {
-        binding.uploadBalance.setOnLongClickListener(object : View.OnLongClickListener {
-            override fun onLongClick(p0: View?): Boolean {
-                viewModel.setupBalance(binding?.uploadBalanceAmount.text.toString());
-                return true
-            }
-        })
-    }
+//    private fun setUpuploadBalanceOnLongClickListener() {
+//        binding.uploadBalance.setOnLongClickListener(object : View.OnLongClickListener {
+//            override fun onLongClick(p0: View?): Boolean {
+//                viewModel.setupBalance(binding?.uploadBalanceAmount.text.toString());
+//                return true
+//            }
+//        })
+//    }
 
     private fun bind() {
         binding = DataBindingUtil.setContentView(this, getLayoutId())
