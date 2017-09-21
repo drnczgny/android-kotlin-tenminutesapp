@@ -3,6 +3,7 @@ package com.adrian.tenminutesapp.pages.home.model
 import android.content.SharedPreferences
 import com.adrian.tenminutesapp.pages.home.dto.CostItem
 import com.adrian.tenminutesapp.pages.home.dto.CostRegistry
+import com.adrian.tenminutesapp.pages.home.dto.FoodType
 import com.adrian.tenminutesapp.pages.home.service.HomePageService
 
 
@@ -16,9 +17,9 @@ class HomePageModel constructor(val homePageService: HomePageService, val shared
 
     var costRegistry: CostRegistry = CostRegistry(ArrayList<CostItem>())
 
-    val menuACostItem: CostItem = CostItem("Menu A", 900)
-    val menuBCostItem: CostItem = CostItem("Menu B", 1090)
-    val flavoredDressingItem: CostItem = CostItem("Flavored dressing", 100)
+    val menuACostItem: CostItem = CostItem(FoodType.MENU_A, 900)
+    val menuBCostItem: CostItem = CostItem(FoodType.MENU_B, 1090)
+    val flavoredDressingItem: CostItem = CostItem(FoodType.FLAVORED_DRESSING, 100)
 
     fun addMenuAItem() {
         costRegistry.add(menuACostItem)

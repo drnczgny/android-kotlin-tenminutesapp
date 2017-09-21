@@ -1,7 +1,6 @@
 package com.adrian.tenminutesapp.pages.home.viewmodel
 
 import android.databinding.Bindable
-import android.util.Log
 import android.view.View
 import com.adrian.tenminutesapp.BR
 import com.adrian.tenminutesapp.base.BaseViewModel
@@ -92,32 +91,23 @@ class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val mode
             }
         }
 
-    fun onCreate() {
-        balance = if (!model.findBalance().equals("")) {
-            model.findBalance().toLong()
-        } else {
-            0.toLong()
-        }
+    override fun onCreate() {
+        balance = parseToLongFromEditText(model.findBalance())
     }
 
     fun onClickAdd(view: View) {
-        Log.e(logging.TAG, "onClickAdd...");
-        if (!sumCost.equals("")) {
-            addNewCost(sumCost.toLong())
-        }
+        val cost = parseToLongFromEditText(sumCost)
+        addNewCost(cost)
         reset()
     }
 
     fun onClickUploadBalance(view: View) {
-        Log.e(logging.TAG, "onClickUploadBalance...");
-        if (!uploadBalanceAmount.equals("")) {
-            uploadBalance(uploadBalanceAmount.toLong())
-        }
+        val amount = parseToLongFromEditText(uploadBalanceAmount)
+        uploadBalance(amount)
         uploadBalanceAmount = ""
     }
 
     fun onClickMenuA(view: View) {
-        Log.e(logging.TAG, "onClickMenuA...");
         menuA = !menuA
         if (menuA) {
             model.addMenuAItem()
@@ -128,7 +118,6 @@ class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val mode
     }
 
     fun onClickMenuB(view: View) {
-        Log.e(logging.TAG, "onClickMenuB...");
         menuB = !menuB
         if (menuB) {
             model.addMenuBItem()
@@ -139,7 +128,6 @@ class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val mode
     }
 
     fun onClickFlavoredDressing(view: View) {
-        Log.e(logging.TAG, "onClickFlavoredDressing...");
         flavoredDressing = !flavoredDressing
         if (flavoredDressing) {
             model.addFlavoredDressingItem()
@@ -160,6 +148,7 @@ class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val mode
         this.balance += uploadAmountWithDiscount
 
         model.saveBalance(balance.toString())
+        this.uploadBalanceAmount = ""
     }
 
     private fun notifyWhenAddOrRemoveItem() {
@@ -173,11 +162,7 @@ class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val mode
     }
 
     private fun notifySumCost() {
-        var currentCost = if (!cost.equals("")) {
-            cost.toLong()
-        } else {
-            0
-        }
+        var currentCost = parseToLongFromEditText(cost)
         sumCost = (currentCost + summarizeMoreItemCost()).toString()
     }
 
@@ -200,11 +185,15 @@ class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val mode
     }
 
     fun setupBalance(newBalance: String) {
-        balance = if (!newBalance.equals("")) {
-            newBalance.toLong()
+        balance = parseToLongFromEditText(newBalance)
+        model.saveBalance(balance.toString())
+    }
+
+    private fun parseToLongFromEditText(text: String): Long {
+        return if (!text.equals("")) {
+            text.toLong()
         } else {
             0.toLong()
         }
-        model.saveBalance(balance.toString())
     }
 }
