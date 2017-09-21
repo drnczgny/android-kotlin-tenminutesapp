@@ -6,16 +6,16 @@ import com.adrian.tenminutesapp.BR
 import com.adrian.tenminutesapp.base.BaseViewModel
 import com.adrian.tenminutesapp.pages.home.dto.CostItem
 import com.adrian.tenminutesapp.pages.home.model.HomePageModel
-import com.adrian.tenminutesapp.pages.home.view.HomePageRouter
+import com.adrian.tenminutesapp.pages.home.view.TenMinutesRouter
 
 /**
  * Created by cadri on 2017. 09. 19..
  */
 
-class HomePageViewModel constructor(val homePageRouter: HomePageRouter, val model: HomePageModel) : BaseViewModel() {
+class TenMinutesViewModel constructor(val tenMinutesRouter: TenMinutesRouter, val model: HomePageModel) : BaseViewModel() {
 
     object logging {
-        val TAG = HomePageViewModel::class.java.simpleName
+        val TAG = TenMinutesViewModel::class.java.simpleName
     }
 
     @Bindable

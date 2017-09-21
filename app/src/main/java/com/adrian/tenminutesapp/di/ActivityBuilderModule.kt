@@ -1,7 +1,7 @@
 package com.adrian.tenminutesapp.di
 
-import com.adrian.tenminutesapp.pages.home.di.HomePageModule
-import com.adrian.tenminutesapp.pages.home.view.HomePageActivity
+import com.adrian.tenminutesapp.pages.home.di.TenMinutesModule
+import com.adrian.tenminutesapp.pages.home.view.TenMinutesActivity
 import com.adrian.tenminutesapp.scope.ActivityScope
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -14,6 +14,6 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBuilderModule {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(HomePageModule::class))
-    abstract fun bindHomePageActivity(): HomePageActivity
+    @ContributesAndroidInjector(modules = arrayOf(TenMinutesModule::class))
+    abstract fun bindHomePageActivity(): TenMinutesActivity
 }

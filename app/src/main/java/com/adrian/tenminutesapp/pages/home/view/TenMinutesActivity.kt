@@ -6,25 +6,25 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.adrian.tenminutesapp.R
-import com.adrian.tenminutesapp.databinding.ActivityHomePageBinding
-import com.adrian.tenminutesapp.pages.home.viewmodel.HomePageViewModel
+import com.adrian.tenminutesapp.databinding.ActivityTenMinutesBinding
+import com.adrian.tenminutesapp.pages.home.viewmodel.TenMinutesViewModel
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class HomePageActivity : AppCompatActivity(), HomePageRouter, HasSupportFragmentInjector {
+class TenMinutesActivity : AppCompatActivity(), TenMinutesRouter, HasSupportFragmentInjector {
 
     object logging {
-        val TAG = HomePageActivity::class.java.simpleName
+        val TAG = TenMinutesActivity::class.java.simpleName
     }
 
-    lateinit var binding: ActivityHomePageBinding
+    lateinit var binding: ActivityTenMinutesBinding
 
     @Inject lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
-    @Inject lateinit var viewModel: HomePageViewModel
+    @Inject lateinit var viewModel: TenMinutesViewModel
 
     /**
      * Dagger injector method build/inject fragments for this activity
@@ -36,7 +36,6 @@ class HomePageActivity : AppCompatActivity(), HomePageRouter, HasSupportFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_home_page)
 
         AndroidInjection.inject(this)
         bind()
@@ -66,5 +65,5 @@ class HomePageActivity : AppCompatActivity(), HomePageRouter, HasSupportFragment
 //        return BR.viewModel
 //    }
 
-    fun getLayoutId() = R.layout.activity_home_page
+    fun getLayoutId() = R.layout.activity_ten_minutes
 }
