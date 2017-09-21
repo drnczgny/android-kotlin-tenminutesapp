@@ -5,6 +5,7 @@ import com.adrian.tenminutesapp.pages.home.dto.CostItem
 import com.adrian.tenminutesapp.pages.home.dto.CostRegistry
 import com.adrian.tenminutesapp.pages.home.dto.FoodType
 import com.adrian.tenminutesapp.pages.home.service.HomePageService
+import org.threeten.bp.LocalDate
 
 
 /**
@@ -13,36 +14,35 @@ import com.adrian.tenminutesapp.pages.home.service.HomePageService
 
 class HomePageModel constructor(val homePageService: HomePageService, val sharedPreferences: SharedPreferences) {
 
-    var balance: Long = 10000
-
     var costRegistry: CostRegistry = CostRegistry(ArrayList<CostItem>())
 
-    val menuACostItem: CostItem = CostItem(FoodType.MENU_A, 900)
-    val menuBCostItem: CostItem = CostItem(FoodType.MENU_B, 1090)
-    val flavoredDressingItem: CostItem = CostItem(FoodType.FLAVORED_DRESSING, 100)
 
     fun addMenuAItem() {
-        costRegistry.add(menuACostItem)
+        costRegistry.add(CostItem(FoodType.MENU_A, 900, LocalDate.now()))
     }
 
     fun addMenuBItem() {
-        costRegistry.add(menuBCostItem)
+        costRegistry.add(CostItem(FoodType.MENU_B, 1090, LocalDate.now()))
     }
 
     fun addFlavoredDressingItem() {
-        costRegistry.add(flavoredDressingItem)
+        costRegistry.add(CostItem(FoodType.FLAVORED_DRESSING, 100, LocalDate.now()))
     }
 
     fun removeMenuAItem() {
-        costRegistry.remove(menuACostItem)
+        costRegistry.remove(0)
     }
 
     fun removeMenuBItem() {
-        costRegistry.remove(menuBCostItem)
+        costRegistry.remove(0)
     }
 
     fun removeFlavoredDressingItem() {
-        costRegistry.remove(flavoredDressingItem)
+        costRegistry.remove(0)
+    }
+
+    fun addItem(price: Long) {
+        costRegistry.add(CostItem(FoodType.DEFAULT, price, LocalDate.now()))
     }
 
     fun saveBalance(balance: String) {
@@ -51,9 +51,8 @@ class HomePageModel constructor(val homePageService: HomePageService, val shared
         editor.commit()
     }
 
-    fun findBalance(): String {
-        return sharedPreferences.getString("BALANCE", "")
-    }
+    fun findBalance(): String = sharedPreferences.getString("BALANCE", "")
+
 
 
 }

@@ -10,7 +10,7 @@ data class CostRegistry(val costItems: MutableList<CostItem>) {
         costItems.add(costItem)
     }
 
-    fun remove(costItem: CostItem) {
-        costItems.remove(costItem)
+    fun remove(id: Int) {
+        costItems.removeAt(id)
     }
 }
