@@ -1,11 +1,12 @@
-package com.adrian.tenminutesapp.pages.home.viewmodel
+package com.adrian.tenminutesapp.pages.tenminutes.subpages.home.viewmodel
 
 import android.databinding.Bindable
 import android.view.View
 import com.adrian.tenminutesapp.BR
 import com.adrian.tenminutesapp.base.BaseViewModel
-import com.adrian.tenminutesapp.pages.home.dto.CostItem
-import com.adrian.tenminutesapp.pages.home.model.HomePageModel
+import com.adrian.tenminutesapp.pages.tenminutes.dto.CostItem
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.model.HomePageModel
+import com.adrian.tenminutesapp.pages.tenminutes.viewmodel.TenMinutesViewModel
 
 /**
  * Created by cadri on 2017. 09. 21..

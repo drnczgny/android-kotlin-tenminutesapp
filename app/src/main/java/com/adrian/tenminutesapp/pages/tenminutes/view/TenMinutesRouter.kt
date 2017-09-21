@@ -1,4 +1,4 @@
-package com.adrian.tenminutesapp.pages.home.view
+package com.adrian.tenminutesapp.pages.tenminutes.view
 
 /**
  * Created by cadri on 2017. 09. 19..

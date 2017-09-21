@@ -1,10 +1,10 @@
-package com.adrian.tenminutesapp.pages.home.model
+package com.adrian.tenminutesapp.pages.tenminutes.subpages.home.model
 
 import android.content.SharedPreferences
-import com.adrian.tenminutesapp.pages.home.dto.CostItem
-import com.adrian.tenminutesapp.pages.home.dto.CostRegistry
-import com.adrian.tenminutesapp.pages.home.dto.FoodType
-import com.adrian.tenminutesapp.pages.home.service.HomePageService
+import com.adrian.tenminutesapp.pages.tenminutes.dto.CostItem
+import com.adrian.tenminutesapp.pages.tenminutes.dto.CostRegistry
+import com.adrian.tenminutesapp.pages.tenminutes.dto.FoodType
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.service.HomePageService
 import org.threeten.bp.LocalDate
 
 

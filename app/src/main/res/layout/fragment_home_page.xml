@@ -2,13 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.adrian.tenminutesapp.pages.home.view.HomePageFragment">
+    tools:context="com.adrian.tenminutesapp.pages.tenminutes.subpages.home.view.HomePageFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.adrian.tenminutesapp.pages.home.viewmodel.HomePageViewModel" />
+            type="com.adrian.tenminutesapp.pages.tenminutes.subpages.home.viewmodel.HomePageViewModel" />
     </data>
 
     <LinearLayout

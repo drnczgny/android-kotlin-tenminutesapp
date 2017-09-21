@@ -1,4 +1,4 @@
-package com.adrian.tenminutesapp.pages.home.view
+package com.adrian.tenminutesapp.pages.tenminutes.view
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -6,7 +6,8 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.adrian.tenminutesapp.R
 import com.adrian.tenminutesapp.databinding.ActivityTenMinutesBinding
-import com.adrian.tenminutesapp.pages.home.viewmodel.TenMinutesViewModel
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.view.HomePageFragment
+import com.adrian.tenminutesapp.pages.tenminutes.viewmodel.TenMinutesViewModel
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector

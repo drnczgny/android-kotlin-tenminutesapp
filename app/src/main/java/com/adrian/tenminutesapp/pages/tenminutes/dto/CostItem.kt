@@ -1,4 +1,4 @@
-package com.adrian.tenminutesapp.pages.home.dto
+package com.adrian.tenminutesapp.pages.tenminutes.dto
 
 import org.threeten.bp.LocalDate
 

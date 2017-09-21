@@ -1,8 +1,8 @@
-package com.adrian.tenminutesapp.pages.home.di
+package com.adrian.tenminutesapp.pages.tenminutes.di
 
-import com.adrian.tenminutesapp.pages.home.view.TenMinutesActivity
-import com.adrian.tenminutesapp.pages.home.view.TenMinutesRouter
-import com.adrian.tenminutesapp.pages.home.viewmodel.TenMinutesViewModel
+import com.adrian.tenminutesapp.pages.tenminutes.view.TenMinutesActivity
+import com.adrian.tenminutesapp.pages.tenminutes.view.TenMinutesRouter
+import com.adrian.tenminutesapp.pages.tenminutes.viewmodel.TenMinutesViewModel
 import com.adrian.tenminutesapp.scope.ActivityScope
 import dagger.Module
 import dagger.Provides

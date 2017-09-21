@@ -1,4 +1,4 @@
-package com.adrian.tenminutesapp.pages.home.view
+package com.adrian.tenminutesapp.pages.tenminutes.subpages.home.view
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.adrian.tenminutesapp.BR
 import com.adrian.tenminutesapp.R
 import com.adrian.tenminutesapp.databinding.FragmentHomePageBinding
-import com.adrian.tenminutesapp.pages.home.viewmodel.HomePageViewModel
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.viewmodel.HomePageViewModel
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 

@@ -1,11 +1,11 @@
-package com.adrian.tenminutesapp.pages.home.di
+package com.adrian.tenminutesapp.pages.tenminutes.subpages.home.di
 
 import android.content.SharedPreferences
-import com.adrian.tenminutesapp.pages.home.model.HomePageModel
-import com.adrian.tenminutesapp.pages.home.service.HomePageService
-import com.adrian.tenminutesapp.pages.home.view.HomePageFragment
-import com.adrian.tenminutesapp.pages.home.view.HomePageRouter
-import com.adrian.tenminutesapp.pages.home.viewmodel.HomePageViewModel
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.service.HomePageService
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.model.HomePageModel
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.view.HomePageFragment
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.view.HomePageRouter
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.viewmodel.HomePageViewModel
 import com.adrian.tenminutesapp.scope.FragmentScope
 import dagger.Module
 import dagger.Provides

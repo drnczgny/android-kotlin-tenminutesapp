@@ -1,6 +1,7 @@
-package com.adrian.tenminutesapp.pages.home.di
+package com.adrian.tenminutesapp.pages.tenminutes.di
 
-import com.adrian.tenminutesapp.pages.home.view.HomePageFragment
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.di.HomePageModule
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.view.HomePageFragment
 import com.adrian.tenminutesapp.scope.FragmentScope
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
