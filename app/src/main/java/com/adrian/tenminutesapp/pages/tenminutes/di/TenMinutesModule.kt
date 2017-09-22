@@ -4,6 +4,8 @@ import com.adrian.tenminutesapp.pages.tenminutes.view.TenMinutesActivity
 import com.adrian.tenminutesapp.pages.tenminutes.view.TenMinutesRouter
 import com.adrian.tenminutesapp.pages.tenminutes.viewmodel.TenMinutesViewModel
 import com.adrian.tenminutesapp.scope.ActivityScope
+import com.adrian.tenminutesapp.utils.viewpager.TenMinutesViewPagerDataModel
+import com.adrian.tenminutesapp.utils.viewpager.ViewPagerAdapter
 import dagger.Module
 import dagger.Provides
 
@@ -22,4 +24,14 @@ class TenMinutesModule {
     @Provides
     fun providesTenMinutesViewModel(tenMinutesRouter: TenMinutesRouter)
             = TenMinutesViewModel(tenMinutesRouter)
+
+    @ActivityScope
+    @Provides
+    fun provideTenMinutesViewPagerDataModel() = TenMinutesViewPagerDataModel()
+
+    @ActivityScope
+    @Provides
+    fun provideViewPagerAdapter(tenMinutesActivity: TenMinutesActivity, tenMinutesViewPagerDataModel: TenMinutesViewPagerDataModel): ViewPagerAdapter {
+        return ViewPagerAdapter(tenMinutesActivity.supportFragmentManager, tenMinutesViewPagerDataModel)
+    }
 }

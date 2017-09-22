@@ -2,19 +2,20 @@ package com.adrian.tenminutesapp.pages.tenminutes.subpages.home.view
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.adrian.tenminutesapp.BR
 import com.adrian.tenminutesapp.R
+import com.adrian.tenminutesapp.base.BaseFragment
 import com.adrian.tenminutesapp.databinding.FragmentHomePageBinding
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.viewmodel.HomePageViewModel
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
 
-class HomePageFragment : Fragment(), HomePageRouter {
+class HomePageFragment : BaseFragment(), HomePageRouter {
 
     object logging {
         val TAG = HomePageFragment::class.java.simpleName
@@ -43,6 +44,10 @@ class HomePageFragment : Fragment(), HomePageRouter {
 
         setUpuploadBalanceOnLongClickListener()
         return binding.getRoot()
+    }
+
+    override fun onSelectedInViewPager() {
+        Log.e(logging.TAG,logging.TAG + " selected in ViewPager")
     }
 
     private fun bind(inflater: LayoutInflater?, container: ViewGroup?) {
