@@ -1,9 +1,11 @@
 package com.adrian.tenminutesapp.pages.tenminutes.subpages.home.model
 
 import android.content.SharedPreferences
-import com.adrian.tenminutesapp.pages.tenminutes.dto.CostItem
 import com.adrian.tenminutesapp.pages.tenminutes.dto.CostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.dto.FoodType
+import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
+import com.adrian.tenminutesapp.pages.tenminutes.model.TenMinutesModel
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.history.dto.History
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.service.HomePageService
 import org.threeten.bp.LocalDate
 
@@ -12,21 +14,20 @@ import org.threeten.bp.LocalDate
  * Created by cadri on 2017. 09. 19..
  */
 
-class HomePageModel constructor(val homePageService: HomePageService, val sharedPreferences: SharedPreferences) {
+class HomePageModel constructor(val tenMinutesModel: TenMinutesModel, val homePageService: HomePageService, val sharedPreferences: SharedPreferences) {
 
-    var costRegistry: CostRegistry = CostRegistry(ArrayList<CostItem>())
-
+    var costRegistry: CostRegistry = CostRegistry(ArrayList<SingleCostRegistry>())
 
     fun addMenuAItem() {
-        costRegistry.add(CostItem(FoodType.MENU_A, 900, LocalDate.now()))
+        costRegistry.add(SingleCostRegistry(FoodType.MENU_A, 900, LocalDate.now()))
     }
 
     fun addMenuBItem() {
-        costRegistry.add(CostItem(FoodType.MENU_B, 1090, LocalDate.now()))
+        costRegistry.add(SingleCostRegistry(FoodType.MENU_B, 1090, LocalDate.now()))
     }
 
     fun addFlavoredDressingItem() {
-        costRegistry.add(CostItem(FoodType.FLAVORED_DRESSING, 100, LocalDate.now()))
+        costRegistry.add(SingleCostRegistry(FoodType.FLAVORED_DRESSING, 100, LocalDate.now()))
     }
 
     fun removeMenuAItem() {
@@ -42,7 +43,7 @@ class HomePageModel constructor(val homePageService: HomePageService, val shared
     }
 
     fun addItem(price: Long) {
-        costRegistry.add(CostItem(FoodType.DEFAULT, price, LocalDate.now()))
+        costRegistry.add(SingleCostRegistry(FoodType.DEFAULT, price, LocalDate.now()))
     }
 
     fun saveBalance(balance: String) {
@@ -53,6 +54,10 @@ class HomePageModel constructor(val homePageService: HomePageService, val shared
 
     fun findBalance(): String = sharedPreferences.getString("BALANCE", "")
 
+    fun saveCostRegistry(balance: String) {
+        saveBalance(balance)
+        tenMinutesModel.addHistory(History(costRegistry))
+    }
 
 
 }

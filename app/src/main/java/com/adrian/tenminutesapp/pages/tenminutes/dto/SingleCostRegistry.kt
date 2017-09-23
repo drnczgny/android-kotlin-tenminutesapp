@@ -6,5 +6,5 @@ import org.threeten.bp.LocalDate
  * Created by cadri on 2017. 09. 19..
  */
 
-data class CostItem(val foodType: FoodType, val price: Long, val dateTime: LocalDate)
+data class SingleCostRegistry(val foodType: FoodType, val price: Long, val dateTime: LocalDate)
 

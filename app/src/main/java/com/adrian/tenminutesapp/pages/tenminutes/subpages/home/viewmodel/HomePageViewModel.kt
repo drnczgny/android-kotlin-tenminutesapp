@@ -4,7 +4,7 @@ import android.databinding.Bindable
 import android.view.View
 import com.adrian.tenminutesapp.BR
 import com.adrian.tenminutesapp.base.BaseViewModel
-import com.adrian.tenminutesapp.pages.tenminutes.dto.CostItem
+import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.model.HomePageModel
 import com.adrian.tenminutesapp.pages.tenminutes.viewmodel.TenMinutesViewModel
 
@@ -139,7 +139,8 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
 
     private fun addNewCost(cost: Long) {
         balance -= cost
-        model.saveBalance(balance.toString())
+//        model.saveBalance(balance.toString())
+        model.saveCostRegistry(balance.toString())
     }
 
     private fun uploadBalance(uploadBalanceAmount: Long) {
@@ -154,9 +155,9 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
     private fun notifyWhenAddOrRemoveItem() {
         moreItems = ""
         var cost: Long = 0
-        for (costItem: CostItem in model.costRegistry.costItems) {
-            moreItems += ("+ " + costItem.price.toString() + ", ")
-            cost += costItem.price
+        for (singleCostRegistry: SingleCostRegistry in model.costRegistry.singleCostRegistries) {
+            moreItems += ("+ " + singleCostRegistry.price.toString() + ", ")
+            cost += singleCostRegistry.price
         }
         notifySumCost()
     }
@@ -168,8 +169,8 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
 
     private fun summarizeMoreItemCost(): Long {
         var cost: Long = 0
-        for (costItem: CostItem in model.costRegistry.costItems) {
-            cost += costItem.price
+        for (singleCostRegistry: SingleCostRegistry in model.costRegistry.singleCostRegistries) {
+            cost += singleCostRegistry.price
         }
         return cost
     }
@@ -181,12 +182,13 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
         menuA = false;
         menuB = false;
         flavoredDressing = false
-        model.costRegistry.costItems.clear()
+        model.costRegistry.singleCostRegistries.clear()
     }
 
     fun setupBalance(newBalance: String) {
         balance = parseToLongFromEditText(newBalance)
         model.saveBalance(balance.toString())
+        uploadBalanceAmount = ""
     }
 
     private fun parseToLongFromEditText(text: String): Long {

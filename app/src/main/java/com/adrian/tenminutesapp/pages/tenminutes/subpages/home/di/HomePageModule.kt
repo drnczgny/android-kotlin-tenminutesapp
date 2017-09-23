@@ -1,8 +1,9 @@
 package com.adrian.tenminutesapp.pages.tenminutes.subpages.home.di
 
 import android.content.SharedPreferences
-import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.service.HomePageService
+import com.adrian.tenminutesapp.pages.tenminutes.model.TenMinutesModel
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.model.HomePageModel
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.service.HomePageService
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.view.HomePageFragment
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.view.HomePageRouter
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.viewmodel.HomePageViewModel
@@ -27,8 +28,8 @@ class HomePageModule {
 
     @FragmentScope
     @Provides
-    fun providesHomePageModel(homePageService: HomePageService, sharedPreferences: SharedPreferences)
-            = HomePageModel(homePageService, sharedPreferences)
+    fun providesHomePageModel(tenMinutesModel: TenMinutesModel, homePageService: HomePageService, sharedPreferences: SharedPreferences)
+            = HomePageModel(tenMinutesModel, homePageService, sharedPreferences)
 
     @FragmentScope
     @Provides

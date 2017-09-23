@@ -4,13 +4,13 @@ package com.adrian.tenminutesapp.pages.tenminutes.dto
  * Created by cadri on 2017. 09. 19..
  */
 
-data class CostRegistry(val costItems: MutableList<CostItem>) {
+data class CostRegistry(val singleCostRegistries: MutableList<SingleCostRegistry>) {
 
-    fun add(costItem: CostItem) {
-        costItems.add(costItem)
+    fun add(singleCostRegistry: SingleCostRegistry) {
+        singleCostRegistries.add(singleCostRegistry)
     }
 
     fun remove(id: Int) {
-        costItems.removeAt(id)
+        singleCostRegistries.removeAt(id)
     }
 }

@@ -1,5 +1,6 @@
 package com.adrian.tenminutesapp.pages.tenminutes.di
 
+import com.adrian.tenminutesapp.pages.tenminutes.model.TenMinutesModel
 import com.adrian.tenminutesapp.pages.tenminutes.view.TenMinutesActivity
 import com.adrian.tenminutesapp.pages.tenminutes.view.TenMinutesRouter
 import com.adrian.tenminutesapp.pages.tenminutes.viewmodel.TenMinutesViewModel
@@ -24,6 +25,10 @@ class TenMinutesModule {
     @Provides
     fun providesTenMinutesViewModel(tenMinutesRouter: TenMinutesRouter)
             = TenMinutesViewModel(tenMinutesRouter)
+
+    @ActivityScope
+    @Provides
+    fun providesTenMinutesModel() = TenMinutesModel()
 
     @ActivityScope
     @Provides

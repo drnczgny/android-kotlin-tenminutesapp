@@ -1,5 +1,6 @@
 package com.adrian.tenminutesapp.pages.tenminutes.subpages.history.di
 
+import com.adrian.tenminutesapp.pages.tenminutes.model.TenMinutesModel
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.history.model.HistoryPageModel
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.history.view.HistoryPageFragment
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.history.view.HistoryPageRouter
@@ -21,7 +22,7 @@ class HistoryPageModule {
 
     @FragmentScope
     @Provides
-    fun provideHistoryPageModel() = HistoryPageModel()
+    fun provideHistoryPageModel(tenMinutesModel: TenMinutesModel) = HistoryPageModel(tenMinutesModel)
 
     @FragmentScope
     @Provides
