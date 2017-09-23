@@ -2,7 +2,6 @@ package com.adrian.tenminutesapp.pages.tenminutes.subpages.history.viewmodel
 
 import android.databinding.Bindable
 import com.adrian.tenminutesapp.base.ListItemViewModel
-import com.adrian.tenminutesapp.pages.tenminutes.dto.FoodType
 import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
 
 /**
@@ -12,7 +11,7 @@ import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
 class SingleCostRegistryItemViewModel constructor(val singleCostRegistry: SingleCostRegistry) : ListItemViewModel() {
 
     @Bindable
-    var foodType: FoodType = singleCostRegistry.foodType
+    var foodType: String = singleCostRegistry.foodType.toString()
         set(value) {
             if (foodType != value) {
                 field = value

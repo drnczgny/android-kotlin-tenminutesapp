@@ -5,7 +5,6 @@ import com.adrian.tenminutesapp.pages.tenminutes.dto.CostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.dto.FoodType
 import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.model.TenMinutesModel
-import com.adrian.tenminutesapp.pages.tenminutes.subpages.history.dto.History
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.service.HomePageService
 import org.threeten.bp.LocalDate
 
@@ -16,34 +15,45 @@ import org.threeten.bp.LocalDate
 
 class HomePageModel constructor(val tenMinutesModel: TenMinutesModel, val homePageService: HomePageService, val sharedPreferences: SharedPreferences) {
 
-    var costRegistry: CostRegistry = CostRegistry(ArrayList<SingleCostRegistry>())
+    var singleCostRegistryList: MutableList<SingleCostRegistry> = ArrayList()
 
     fun addMenuAItem() {
-        costRegistry.add(SingleCostRegistry(FoodType.MENU_A, 900, LocalDate.now()))
+        singleCostRegistryList.add(SingleCostRegistry(FoodType.MENU_A, 900, LocalDate.now()))
     }
 
     fun addMenuBItem() {
-        costRegistry.add(SingleCostRegistry(FoodType.MENU_B, 1090, LocalDate.now()))
+        singleCostRegistryList.add(SingleCostRegistry(FoodType.MENU_B, 1090, LocalDate.now()))
     }
 
     fun addFlavoredDressingItem() {
-        costRegistry.add(SingleCostRegistry(FoodType.FLAVORED_DRESSING, 100, LocalDate.now()))
+        singleCostRegistryList.add(SingleCostRegistry(FoodType.FLAVORED_DRESSING, 100, LocalDate.now()))
     }
 
     fun removeMenuAItem() {
-        costRegistry.remove(0)
+//        removeByType(FoodType.MENU_A)
+        singleCostRegistryList.removeAt(0)
     }
 
     fun removeMenuBItem() {
-        costRegistry.remove(0)
+//        removeByType(FoodType.MENU_B)
+        singleCostRegistryList.removeAt(0)
     }
 
     fun removeFlavoredDressingItem() {
-        costRegistry.remove(0)
+//        removeByType(FoodType.FLAVORED_DRESSING)
+        singleCostRegistryList.removeAt(0)
     }
 
     fun addItem(price: Long) {
-        costRegistry.add(SingleCostRegistry(FoodType.DEFAULT, price, LocalDate.now()))
+        singleCostRegistryList.add(SingleCostRegistry(FoodType.DEFAULT, price, LocalDate.now()))
+    }
+
+    fun removeByType(foodType: FoodType) {
+        for(item: SingleCostRegistry in singleCostRegistryList) {
+            if(item.foodType == foodType) {
+                singleCostRegistryList.remove(item)
+            }
+        }
     }
 
     fun saveBalance(balance: String) {
@@ -56,7 +66,7 @@ class HomePageModel constructor(val tenMinutesModel: TenMinutesModel, val homePa
 
     fun saveCostRegistry(balance: String) {
         saveBalance(balance)
-        tenMinutesModel.addHistory(History(costRegistry))
+        tenMinutesModel.addCostRegistry(CostRegistry(singleCostRegistryList))
     }
 
 

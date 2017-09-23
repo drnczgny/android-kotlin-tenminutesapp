@@ -155,7 +155,7 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
     private fun notifyWhenAddOrRemoveItem() {
         moreItems = ""
         var cost: Long = 0
-        for (singleCostRegistry: SingleCostRegistry in model.costRegistry.singleCostRegistries) {
+        for (singleCostRegistry: SingleCostRegistry in model.singleCostRegistryList) {
             moreItems += ("+ " + singleCostRegistry.price.toString() + ", ")
             cost += singleCostRegistry.price
         }
@@ -169,7 +169,7 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
 
     private fun summarizeMoreItemCost(): Long {
         var cost: Long = 0
-        for (singleCostRegistry: SingleCostRegistry in model.costRegistry.singleCostRegistries) {
+        for (singleCostRegistry: SingleCostRegistry in model.singleCostRegistryList) {
             cost += singleCostRegistry.price
         }
         return cost
@@ -182,7 +182,7 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
         menuA = false;
         menuB = false;
         flavoredDressing = false
-        model.costRegistry.singleCostRegistries.clear()
+        model.singleCostRegistryList.clear()
     }
 
     fun setupBalance(newBalance: String) {

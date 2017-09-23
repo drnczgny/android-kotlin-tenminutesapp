@@ -1,9 +1,8 @@
 package com.adrian.tenminutesapp.pages.tenminutes.model
 
-import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.dto.CostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.dto.FoodType
-import com.adrian.tenminutesapp.pages.tenminutes.subpages.history.dto.History
+import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
 import org.threeten.bp.LocalDate
 
 /**
@@ -16,17 +15,17 @@ class TenMinutesModel {
         val TAG = TenMinutesModel::class.java.simpleName
     }
 
-    var historyList: MutableList<History> = ArrayList()
+    var costRegistryList: MutableList<CostRegistry> = ArrayList()
 
     init {
-        historyList = testHistory()
+        costRegistryList = testHistory()
     }
 
-    fun addHistory(history: History) {
-        historyList.add(0, history)
+    fun addCostRegistry(costRegistry: CostRegistry) {
+        costRegistryList.add(0, costRegistry)
     }
 
-    private fun testHistory(): MutableList<History> {
+    private fun testHistory(): MutableList<CostRegistry> {
         val costRegistry1 = CostRegistry(listOf<SingleCostRegistry>(
                 SingleCostRegistry(FoodType.DEFAULT, 1000, LocalDate.now()),
                 SingleCostRegistry(FoodType.DEFAULT, 2000, LocalDate.now()),
@@ -35,6 +34,6 @@ class TenMinutesModel {
                 SingleCostRegistry(FoodType.DEFAULT, 1500, LocalDate.now()),
                 SingleCostRegistry(FoodType.DEFAULT, 2500, LocalDate.now()),
                 SingleCostRegistry(FoodType.DEFAULT, 3500, LocalDate.now())) as MutableList<SingleCostRegistry>)
-        return mutableListOf(History(costRegistry1), History(costRegistry2))
+        return mutableListOf(costRegistry1, costRegistry2)
     }
 }
