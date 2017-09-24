@@ -19,11 +19,6 @@ fun  setupRecyclerViewAdapter(recyclerView: RecyclerView, items: List<ListItemVi
     recyclerViewAdapter.variableId = variableId
 }
 
-@BindingAdapter("layoutManager")
-fun setLayoutManager(recyclerView: RecyclerView, layoutManagerFactory: LayoutManagers.LayoutManagerFactory) {
-    recyclerView.layoutManager = layoutManagerFactory.create(recyclerView)
-}
-
 fun getAdapter(recyclerView: RecyclerView): RecyclerViewAdapter<ListItemViewModel> {
     var adapter = recyclerView.adapter
     if (adapter == null) {

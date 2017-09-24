@@ -4,24 +4,19 @@ import android.databinding.Bindable
 import com.adrian.tenminutesapp.BR
 import com.adrian.tenminutesapp.R
 import com.adrian.tenminutesapp.base.ListItemViewModel
-import com.adrian.tenminutesapp.pages.tenminutes.dto.FoodType
+import com.adrian.tenminutesapp.pages.tenminutes.dto.CostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
-import org.threeten.bp.LocalDate
+import com.annimon.stream.Collectors
+import com.annimon.stream.Stream
 
 /**
  * Created by cadri on 2017. 09. 23..
  */
 
-class CostRegistryItemViewModel  : ListItemViewModel() {
-
-    init {
-
-    }
+class CostRegistryItemViewModel constructor(costRegistry: CostRegistry) : ListItemViewModel() {
 
     @Bindable
-    var singleCostRegistrieItemViewModels: MutableList<SingleCostRegistryItemViewModel> = mutableListOf(
-            SingleCostRegistryItemViewModel(SingleCostRegistry(FoodType.DEFAULT, 1000, LocalDate.now())),
-            SingleCostRegistryItemViewModel(SingleCostRegistry(FoodType.DEFAULT, 2000, LocalDate.now())))
+    var singleCostRegistrieItemViewModels: List<SingleCostRegistryItemViewModel> = convertToViewModels(costRegistry.singleCostRegistries)
         set(value) {
             if (!singleCostRegistrieItemViewModels.equals(value)) {
                 field = value
@@ -34,6 +29,14 @@ class CostRegistryItemViewModel  : ListItemViewModel() {
     @Bindable
     fun getVariableId(): Int {
         return BR.viewModel
+    }
+
+    private fun convertToViewModel(singleCostRegistry: SingleCostRegistry): SingleCostRegistryItemViewModel {
+        return SingleCostRegistryItemViewModel(singleCostRegistry)
+    }
+
+    private fun convertToViewModels(singleCostRegistries: List<SingleCostRegistry>): List<SingleCostRegistryItemViewModel> {
+        return Stream.of(singleCostRegistries).map { singleCostRegistry -> convertToViewModel(singleCostRegistry) }.collect(Collectors.toList())
     }
 
 }

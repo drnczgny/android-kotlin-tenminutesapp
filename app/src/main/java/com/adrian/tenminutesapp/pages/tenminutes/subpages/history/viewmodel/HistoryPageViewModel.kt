@@ -4,8 +4,12 @@ import android.databinding.Bindable
 import com.adrian.tenminutesapp.BR
 import com.adrian.tenminutesapp.R
 import com.adrian.tenminutesapp.base.BaseViewModel
+import com.adrian.tenminutesapp.pages.tenminutes.dto.CostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.history.model.HistoryPageModel
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.history.view.HistoryPageRouter
+import com.annimon.stream.Collectors
+import com.annimon.stream.Stream
+
 
 /**
  * Created by cadri on 2017. 09. 23..
@@ -13,21 +17,12 @@ import com.adrian.tenminutesapp.pages.tenminutes.subpages.history.view.HistoryPa
 
 class HistoryPageViewModel constructor(router: HistoryPageRouter, model: HistoryPageModel) : BaseViewModel() {
 
-    @Bindable
-    var costRegistryItemViewModels: MutableList<CostRegistryItemViewModel> = mutableListOf(CostRegistryItemViewModel(), CostRegistryItemViewModel())
-
-//    @Bindable
-//    var costRegistryItemViewModels: MutableList<TempListItemViewModel> = mutableListOf(TempListItemViewModel(), TempListItemViewModel())
-//        set(value) {
-//            if (!costRegistryItemViewModels.equals(value)) {
-//                field = value
-//            }
-//        }
-
-    override fun onCreate() {
-
+    object logging {
+        val TAG = HistoryPageViewModel::class.java.simpleName
     }
 
+    @Bindable
+    var costRegistryItemViewModels: List<CostRegistryItemViewModel> = convertToViewModels(model.findHistory())
 
     @Bindable
     fun getItemLayoutId() = R.layout.list_item_cost_registry
@@ -37,4 +32,15 @@ class HistoryPageViewModel constructor(router: HistoryPageRouter, model: History
         return BR.viewModel
     }
 
+    override fun onCreate() {
+
+    }
+
+    private fun convertToViewModel(costRegistry: CostRegistry): CostRegistryItemViewModel {
+        return CostRegistryItemViewModel(costRegistry)
+    }
+
+    private fun convertToViewModels(costRegistries: List<CostRegistry>): List<CostRegistryItemViewModel> {
+        return Stream.of(costRegistries).map { costRegistry -> convertToViewModel(costRegistry) }.collect(Collectors.toList())
+    }
 }
