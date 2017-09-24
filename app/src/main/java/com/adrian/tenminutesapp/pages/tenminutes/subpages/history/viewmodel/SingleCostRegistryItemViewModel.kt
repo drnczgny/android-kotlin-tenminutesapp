@@ -36,5 +36,4 @@ class SingleCostRegistryItemViewModel constructor(val singleCostRegistry: Single
 //                notifyPropertyChanged(BR.menuA)
             }
         }
-
 }

@@ -38,5 +38,4 @@ class CostRegistryItemViewModel constructor(costRegistry: CostRegistry) : ListIt
     private fun convertToViewModels(singleCostRegistries: List<SingleCostRegistry>): List<SingleCostRegistryItemViewModel> {
         return Stream.of(singleCostRegistries).map { singleCostRegistry -> convertToViewModel(singleCostRegistry) }.collect(Collectors.toList())
     }
-
 }

@@ -12,13 +12,16 @@ import org.threeten.bp.LocalDate
 
 class HistoryPageModel constructor(val tenMinutesModel: TenMinutesModel) {
 
-    fun findHistory() : List<CostRegistry> {
-        return listOf(
-                CostRegistry(mutableListOf<SingleCostRegistry>(
-                        SingleCostRegistry(FoodType.DEFAULT, 1000, LocalDate.now()),
-                        SingleCostRegistry(FoodType.DEFAULT, 2000, LocalDate.now()),
-                        SingleCostRegistry(FoodType.DEFAULT, 3000, LocalDate.now())
-                ))
-        )
+    fun findHistory(): List<CostRegistry> {
+        var costRegistry1: CostRegistry = CostRegistry(mutableListOf<SingleCostRegistry>(
+                SingleCostRegistry(FoodType.MENU_A, 1000, LocalDate.now()),
+                SingleCostRegistry(FoodType.DEFAULT, 2000, LocalDate.now()),
+                SingleCostRegistry(FoodType.DEFAULT, 3000, LocalDate.now())
+        ))
+        var costRegistry2: CostRegistry = CostRegistry(mutableListOf<SingleCostRegistry>(
+                SingleCostRegistry(FoodType.MENU_B, 1500, LocalDate.now()),
+                SingleCostRegistry(FoodType.DEFAULT, 2500, LocalDate.now())
+        ))
+        return listOf(costRegistry1, costRegistry2)
     }
 }
