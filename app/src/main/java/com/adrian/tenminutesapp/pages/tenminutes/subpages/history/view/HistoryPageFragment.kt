@@ -41,8 +41,9 @@ class HistoryPageFragment : BaseFragment(), HistoryPageRouter {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        return inflater!!.inflate(R.layout.fragment_history_page, container, false)
+        bind(inflater, container)
+//        binding?.rvCostRegistries?.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
+        return binding.getRoot()
     }
 
     override fun onSelectedInViewPager() {
@@ -51,12 +52,12 @@ class HistoryPageFragment : BaseFragment(), HistoryPageRouter {
 
     private fun bind(inflater: LayoutInflater?, container: ViewGroup?) {
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        binding?.viewModel = viewModel as HistoryPageViewModel
+        binding?.viewModel = viewModel
         binding?.executePendingBindings()
     }
 
 
-    private fun getLayoutId() = R.layout.fragment_home_page
+    private fun getLayoutId() = R.layout.fragment_history_page
 
     private fun getVariableId(): Int {
         return BR.viewModel

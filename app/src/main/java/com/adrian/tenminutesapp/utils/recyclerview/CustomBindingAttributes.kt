@@ -1,6 +1,7 @@
 package com.adrian.tenminutesapp.utils.recyclerview
 
 import android.databinding.BindingAdapter
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.adrian.tenminutesapp.base.ListItemViewModel
 
@@ -11,10 +12,16 @@ import com.adrian.tenminutesapp.base.ListItemViewModel
 
 @BindingAdapter(value = *arrayOf("listItems", "listItemLayout", "variableId"), requireAll = true)
 fun  setupRecyclerViewAdapter(recyclerView: RecyclerView, items: List<ListItemViewModel>, itemLayout: Int, variableId: Int) {
+    recyclerView.setLayoutManager(LinearLayoutManager(recyclerView.context, LinearLayoutManager.VERTICAL, false))
     val recyclerViewAdapter = getAdapter(recyclerView)
     recyclerViewAdapter.items = items
     recyclerViewAdapter.itemLayout = itemLayout
     recyclerViewAdapter.variableId = variableId
+}
+
+@BindingAdapter("layoutManager")
+fun setLayoutManager(recyclerView: RecyclerView, layoutManagerFactory: LayoutManagers.LayoutManagerFactory) {
+    recyclerView.layoutManager = layoutManagerFactory.create(recyclerView)
 }
 
 fun getAdapter(recyclerView: RecyclerView): RecyclerViewAdapter<ListItemViewModel> {
@@ -25,3 +32,4 @@ fun getAdapter(recyclerView: RecyclerView): RecyclerViewAdapter<ListItemViewMode
     }
     return adapter as RecyclerViewAdapter<ListItemViewModel>
 }
+
