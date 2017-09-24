@@ -22,7 +22,7 @@ class TenMinutesModel {
     }
 
     fun addCostRegistry(costRegistry: CostRegistry) {
-        costRegistryList.add(0, costRegistry)
+        costRegistryList.add(costRegistry)
     }
 
     private fun testHistory(): MutableList<CostRegistry> {
