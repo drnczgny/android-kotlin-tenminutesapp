@@ -18,7 +18,6 @@
             android:id="@+id/rvCostRegistries"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
             android:paddingTop="8dp"
             app:listItemLayout="@{viewModel.itemLayoutId}"
             app:listItems="@{viewModel.costRegistryItemViewModels}"
