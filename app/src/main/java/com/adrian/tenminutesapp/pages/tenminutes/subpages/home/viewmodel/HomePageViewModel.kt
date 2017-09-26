@@ -34,7 +34,8 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
             if (cost != value) {
                 field = value
                 notifyPropertyChanged(BR.cost)
-                notifySumCost()
+//                notifySumCost()
+                calculateCurrentCost()
             }
         }
 
@@ -92,54 +93,6 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
             }
         }
 
-    override fun onCreate() {
-        balance = parseToLongFromEditText(model.findBalance())
-    }
-
-    fun onClickAdd(view: View) {
-        val cost = parseToLongFromEditText(sumCost)
-        addNewCost(cost)
-        reset()
-    }
-
-    fun onClickUploadBalance(view: View) {
-        val amount = parseToLongFromEditText(uploadBalanceAmount)
-        uploadBalance(amount)
-        uploadBalanceAmount = ""
-    }
-
-    fun onClickMenuA(view: View) {
-        menuA = !menuA
-        if (menuA) {
-            model.addMenuAItem()
-        } else {
-            model.removeMenuAItem()
-        }
-        notifyWhenAddOrRemoveItem()
-    }
-
-    fun onClickMenuB(view: View) {
-        menuB = !menuB
-        if (menuB) {
-            model.addMenuBItem()
-        } else {
-            model.removeMenuBItem()
-        }
-        notifyWhenAddOrRemoveItem()
-    }
-
-    fun onClickFlavoredDressing(view: View) {
-        flavoredDressing = !flavoredDressing
-        if (flavoredDressing) {
-            model.addFlavoredDressingItem()
-        } else {
-            model.removeFlavoredDressingItem()
-        }
-        notifyWhenAddOrRemoveItem()
-    }
-
-    /////////////////////////////////////////////
-
     @Bindable
     var menuACount: Int = 0
         set(value) {
@@ -167,42 +120,80 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
             }
         }
 
+    override fun onCreate() {
+        balance = parseToLongFromEditText(model.findBalance())
+    }
+
+    fun onClickAdd(view: View) {
+        val cost = parseToLongFromEditText(sumCost)
+        addNewCost(cost)
+        reset()
+    }
+
+    fun onClickUploadBalance(view: View) {
+        val amount = parseToLongFromEditText(uploadBalanceAmount)
+        uploadBalance(amount)
+        uploadBalanceAmount = ""
+    }
+
+    fun onClickMenuA(view: View) {
+        menuA = !menuA
+    }
+
+    fun onClickMenuB(view: View) {
+        menuB = !menuB
+    }
+
+    fun onClickFlavoredDressing(view: View) {
+        flavoredDressing = !flavoredDressing
+    }
+
     fun onClickAddMenuA(view: View) {
         menuA = true
         menuACount = increaseItemCount(menuACount)
+        calculateCurrentCost()
     }
 
     fun onClickAddMenuB(view: View) {
         menuB = true
         menuBCount = increaseItemCount(menuBCount)
+        calculateCurrentCost()
     }
 
     fun onClickAddFlavoredDressing(view: View) {
         flavoredDressing = true
         flavoredDressingCount = increaseItemCount(flavoredDressingCount)
+        calculateCurrentCost()
     }
 
     fun onClickRemoveMenuA(view: View) {
-        menuA = false
         menuACount = decreaseItemCount(menuACount)
+        menuA = checkSelectedState(menuACount)
+        calculateCurrentCost()
     }
 
     fun onClickRemoveMenuB(view: View) {
-        menuB = false
         menuBCount = decreaseItemCount(menuBCount)
+        menuB = checkSelectedState(menuBCount)
+        calculateCurrentCost()
     }
 
     fun onClickRemoveFlavoredDressing(view: View) {
-        flavoredDressing = false
         flavoredDressingCount = decreaseItemCount(flavoredDressingCount)
+        flavoredDressing = checkSelectedState(flavoredDressingCount)
+        calculateCurrentCost()
     }
 
     /////////////////////////////////////////////
 
+    private fun calculateCurrentCost() {
+        sumCost = model.calculateCurrentCost(OrderSummaryDto(parseToLongFromEditText(cost), menuACount, menuBCount, flavoredDressingCount)).toString()
+    }
+
     private fun addNewCost(cost: Long) {
         balance -= cost
-//        model.saveBalance(balance.toString())
-        val orderSummaryDto = OrderSummaryDto(balance, cost, menuACount, menuBCount, flavoredDressingCount)
+        model.uploadBalance(balance)
+        val orderSummaryDto = OrderSummaryDto(cost, menuACount, menuBCount, flavoredDressingCount)
         model.saveCostRegistry(orderSummaryDto)
     }
 
@@ -213,16 +204,6 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
 
         model.uploadBalance(balance)
         this.uploadBalanceAmount = ""
-    }
-
-    private fun notifyWhenAddOrRemoveItem() {
-        moreItems = ""
-        var cost: Long = 0
-        for (singleCostRegistry: SingleCostRegistry in model.singleCostRegistryList) {
-            moreItems += ("+ " + singleCostRegistry.price.toString() + ", ")
-            cost += singleCostRegistry.price
-        }
-        notifySumCost()
     }
 
     private fun notifySumCost() {
@@ -245,6 +226,9 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
         menuA = false;
         menuB = false;
         flavoredDressing = false
+        menuACount = 0
+        menuBCount = 0
+        flavoredDressingCount = 0
         model.singleCostRegistryList.clear()
     }
 
@@ -268,4 +252,6 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
     private fun increaseItemCount(itemCount: Int): Int
             = itemCount + 1
 
+    private fun checkSelectedState(itemCount: Int): Boolean
+         = if (itemCount > 0) true else false
 }

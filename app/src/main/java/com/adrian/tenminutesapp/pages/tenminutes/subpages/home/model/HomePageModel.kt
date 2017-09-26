@@ -18,55 +18,24 @@ class HomePageModel constructor(val tenMinutesModel: TenMinutesModel, val homePa
 
     var singleCostRegistryList: MutableList<SingleCostRegistry> = ArrayList()
 
-    fun addMenuAItem() {
-        singleCostRegistryList.add(SingleCostRegistry(FoodType.MENU_A, 900, LocalDateTime.now()))
-    }
-
-    fun addMenuBItem() {
-        singleCostRegistryList.add(SingleCostRegistry(FoodType.MENU_B, 1090, LocalDateTime.now()))
-    }
-
-    fun addFlavoredDressingItem() {
-        singleCostRegistryList.add(SingleCostRegistry(FoodType.FLAVORED_DRESSING, 100, LocalDateTime.now()))
-    }
-
-    fun removeMenuAItem() {
-//        removeByType(FoodType.MENU_A)
-        singleCostRegistryList.removeAt(0)
-    }
-
-    fun removeMenuBItem() {
-//        removeByType(FoodType.MENU_B)
-        singleCostRegistryList.removeAt(0)
-    }
-
-    fun removeFlavoredDressingItem() {
-//        removeByType(FoodType.FLAVORED_DRESSING)
-        singleCostRegistryList.removeAt(0)
-    }
-
-    fun addItem(price: Long) {
-        singleCostRegistryList.add(SingleCostRegistry(FoodType.DEFAULT, price, LocalDateTime.now()))
-    }
-
-    fun removeByType(foodType: FoodType) {
-        for (item: SingleCostRegistry in singleCostRegistryList) {
-            if (item.foodType == foodType) {
-                singleCostRegistryList.remove(item)
-            }
-        }
-    }
-
     fun findBalance(): String = sharedPreferences.getString("BALANCE", "")
 
     fun saveCostRegistry(orderSummaryDto: OrderSummaryDto) {
-        saveBalance(orderSummaryDto.balance.toString())
         setupList(orderSummaryDto)
         tenMinutesModel.addCostRegistry(CostRegistry(singleCostRegistryList.toList()))
     }
 
     fun uploadBalance(balance: Long) {
         saveBalance(balance.toString())
+    }
+
+    fun calculateCurrentCost(orderSummaryDto: OrderSummaryDto): Long {
+        var result: Long = 0
+        result += orderSummaryDto.typedCost
+        result += orderSummaryDto.menuACount * FoodType.MENU_A.price.toLong()
+        result += orderSummaryDto.menuBCount * FoodType.MENU_B.price.toLong()
+        result += orderSummaryDto.flavoredDressingCount * FoodType.FLAVORED_DRESSING.price.toLong()
+        return result
     }
 
     private fun saveBalance(balance: String) {
@@ -80,10 +49,10 @@ class HomePageModel constructor(val tenMinutesModel: TenMinutesModel, val homePa
         if (orderSummaryDto.typedCost > 0)
             singleCostRegistryList.add(SingleCostRegistry(FoodType.DEFAULT, orderSummaryDto.typedCost, LocalDateTime.now()))
         for (i in 1..orderSummaryDto.menuACount)
-            singleCostRegistryList.add(SingleCostRegistry(FoodType.MENU_A, 900, LocalDateTime.now()))
+            singleCostRegistryList.add(SingleCostRegistry(FoodType.MENU_A, FoodType.MENU_A.price, LocalDateTime.now()))
         for (i in 1..orderSummaryDto.menuBCount)
-            singleCostRegistryList.add(SingleCostRegistry(FoodType.MENU_B, 1090, LocalDateTime.now()))
+            singleCostRegistryList.add(SingleCostRegistry(FoodType.MENU_B, FoodType.MENU_B.price, LocalDateTime.now()))
         for (i in 1..orderSummaryDto.flavoredDressingCount)
-            singleCostRegistryList.add(SingleCostRegistry(FoodType.FLAVORED_DRESSING, 100, LocalDateTime.now()))
+            singleCostRegistryList.add(SingleCostRegistry(FoodType.FLAVORED_DRESSING, FoodType.FLAVORED_DRESSING.price, LocalDateTime.now()))
     }
 }
