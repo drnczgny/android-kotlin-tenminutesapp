@@ -5,6 +5,7 @@ import com.adrian.tenminutesapp.pages.tenminutes.dto.CostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.dto.FoodType
 import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.model.TenMinutesModel
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.dto.OrderSummaryDto
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.service.HomePageService
 import org.threeten.bp.LocalDateTime
 
@@ -49,25 +50,40 @@ class HomePageModel constructor(val tenMinutesModel: TenMinutesModel, val homePa
     }
 
     fun removeByType(foodType: FoodType) {
-        for(item: SingleCostRegistry in singleCostRegistryList) {
-            if(item.foodType == foodType) {
+        for (item: SingleCostRegistry in singleCostRegistryList) {
+            if (item.foodType == foodType) {
                 singleCostRegistryList.remove(item)
             }
         }
     }
 
-    fun saveBalance(balance: String) {
+    fun findBalance(): String = sharedPreferences.getString("BALANCE", "")
+
+    fun saveCostRegistry(orderSummaryDto: OrderSummaryDto) {
+        saveBalance(orderSummaryDto.balance.toString())
+        setupList(orderSummaryDto)
+        tenMinutesModel.addCostRegistry(CostRegistry(singleCostRegistryList.toList()))
+    }
+
+    fun uploadBalance(balance: Long) {
+        saveBalance(balance.toString())
+    }
+
+    private fun saveBalance(balance: String) {
         val editor = sharedPreferences.edit()
         editor.putString("BALANCE", balance)
         editor.commit()
     }
 
-    fun findBalance(): String = sharedPreferences.getString("BALANCE", "")
-
-    fun saveCostRegistry(balance: String) {
-        saveBalance(balance)
-        tenMinutesModel.addCostRegistry(CostRegistry(singleCostRegistryList.toList()))
+    private fun setupList(orderSummaryDto: OrderSummaryDto) {
+        singleCostRegistryList.clear()
+        if (orderSummaryDto.typedCost > 0)
+            singleCostRegistryList.add(SingleCostRegistry(FoodType.DEFAULT, orderSummaryDto.typedCost, LocalDateTime.now()))
+        for (i in 1..orderSummaryDto.menuACount)
+            singleCostRegistryList.add(SingleCostRegistry(FoodType.MENU_A, 900, LocalDateTime.now()))
+        for (i in 1..orderSummaryDto.menuBCount)
+            singleCostRegistryList.add(SingleCostRegistry(FoodType.MENU_B, 1090, LocalDateTime.now()))
+        for (i in 1..orderSummaryDto.flavoredDressingCount)
+            singleCostRegistryList.add(SingleCostRegistry(FoodType.FLAVORED_DRESSING, 100, LocalDateTime.now()))
     }
-
-
 }

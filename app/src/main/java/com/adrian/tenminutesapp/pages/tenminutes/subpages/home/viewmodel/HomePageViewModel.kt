@@ -5,6 +5,7 @@ import android.view.View
 import com.adrian.tenminutesapp.BR
 import com.adrian.tenminutesapp.base.BaseViewModel
 import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.dto.OrderSummaryDto
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.model.HomePageModel
 import com.adrian.tenminutesapp.pages.tenminutes.viewmodel.TenMinutesViewModel
 
@@ -137,10 +138,72 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
         notifyWhenAddOrRemoveItem()
     }
 
+    /////////////////////////////////////////////
+
+    @Bindable
+    var menuACount: Int = 0
+        set(value) {
+            if (menuACount != value) {
+                field = value
+                notifyPropertyChanged(BR.menuACount)
+            }
+        }
+
+    @Bindable
+    var menuBCount: Int = 0
+        set(value) {
+            if (menuBCount != value) {
+                field = value
+                notifyPropertyChanged(BR.menuBCount)
+            }
+        }
+
+    @Bindable
+    var flavoredDressingCount: Int = 0
+        set(value) {
+            if (flavoredDressingCount != value) {
+                field = value
+                notifyPropertyChanged(BR.flavoredDressingCount)
+            }
+        }
+
+    fun onClickAddMenuA(view: View) {
+        menuA = true
+        menuACount = increaseItemCount(menuACount)
+    }
+
+    fun onClickAddMenuB(view: View) {
+        menuB = true
+        menuBCount = increaseItemCount(menuBCount)
+    }
+
+    fun onClickAddFlavoredDressing(view: View) {
+        flavoredDressing = true
+        flavoredDressingCount = increaseItemCount(flavoredDressingCount)
+    }
+
+    fun onClickRemoveMenuA(view: View) {
+        menuA = false
+        menuACount = decreaseItemCount(menuACount)
+    }
+
+    fun onClickRemoveMenuB(view: View) {
+        menuB = false
+        menuBCount = decreaseItemCount(menuBCount)
+    }
+
+    fun onClickRemoveFlavoredDressing(view: View) {
+        flavoredDressing = false
+        flavoredDressingCount = decreaseItemCount(flavoredDressingCount)
+    }
+
+    /////////////////////////////////////////////
+
     private fun addNewCost(cost: Long) {
         balance -= cost
 //        model.saveBalance(balance.toString())
-        model.saveCostRegistry(balance.toString())
+        val orderSummaryDto = OrderSummaryDto(balance, cost, menuACount, menuBCount, flavoredDressingCount)
+        model.saveCostRegistry(orderSummaryDto)
     }
 
     private fun uploadBalance(uploadBalanceAmount: Long) {
@@ -148,7 +211,7 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
         var uploadAmountWithDiscount = uploadBalanceAmount + discount
         this.balance += uploadAmountWithDiscount
 
-        model.saveBalance(balance.toString())
+        model.uploadBalance(balance)
         this.uploadBalanceAmount = ""
     }
 
@@ -187,7 +250,7 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
 
     fun setupBalance(newBalance: String) {
         balance = parseToLongFromEditText(newBalance)
-        model.saveBalance(balance.toString())
+        model.uploadBalance(balance)
         uploadBalanceAmount = ""
     }
 
@@ -199,5 +262,10 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
         }
     }
 
+    private fun decreaseItemCount(itemCount: Int): Int
+            = if (itemCount - 1 >= 0) itemCount - 1 else 0
+
+    private fun increaseItemCount(itemCount: Int): Int
+            = itemCount + 1
 
 }
