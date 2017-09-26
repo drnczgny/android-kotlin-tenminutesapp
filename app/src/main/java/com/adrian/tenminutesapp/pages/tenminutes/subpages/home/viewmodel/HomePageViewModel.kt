@@ -137,15 +137,15 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
     }
 
     fun onClickMenuA(view: View) {
-        menuA = !menuA
+//        menuA = !menuA
     }
 
     fun onClickMenuB(view: View) {
-        menuB = !menuB
+//        menuB = !menuB
     }
 
     fun onClickFlavoredDressing(view: View) {
-        flavoredDressing = !flavoredDressing
+//        flavoredDressing = !flavoredDressing
     }
 
     fun onClickAddMenuA(view: View) {
@@ -183,8 +183,6 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
         flavoredDressing = checkSelectedState(flavoredDressingCount)
         calculateCurrentCost()
     }
-
-    /////////////////////////////////////////////
 
     private fun calculateCurrentCost() {
         sumCost = model.calculateCurrentCost(OrderSummaryDto(parseToLongFromEditText(cost), menuACount, menuBCount, flavoredDressingCount)).toString()
@@ -253,5 +251,5 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
             = itemCount + 1
 
     private fun checkSelectedState(itemCount: Int): Boolean
-         = if (itemCount > 0) true else false
+            = if (itemCount > 0) true else false
 }
