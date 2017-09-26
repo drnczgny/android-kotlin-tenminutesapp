@@ -72,12 +72,14 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.11'
     kapt 'com.google.dagger:dagger-android-processor:2.11'
 
+    implementation 'android.arch.persistence.room:runtime:1.0.0-alpha5'
+    kapt 'android.arch.persistence.room:compiler:1.0.0-alpha5'
+
     //3rd party
     implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
     testImplementation 'org.mockito:mockito-core:2.8.9'
 //    testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
 //    testImplementation group: 'org.mockito', name: 'mockito-all', version: '2.0.2-beta'
-
 
     testImplementation 'junit:junit:4.12'
     testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
