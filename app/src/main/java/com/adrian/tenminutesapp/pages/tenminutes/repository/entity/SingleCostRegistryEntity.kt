@@ -7,8 +7,8 @@ import android.arch.persistence.room.PrimaryKey
  * Created by cadri on 2017. 09. 27..
  */
 
-@Entity(tableName = "SingleCostRegistryEntity")
-class SingleCostRegistryEntity constructor(@PrimaryKey(autoGenerate = true)
+@Entity(tableName = "SingleCostRegistry")
+data class SingleCostRegistryEntity constructor(@PrimaryKey(autoGenerate = true)
                                            val id: Long,
                                            val foodType: String,
                                            val price: Long,
