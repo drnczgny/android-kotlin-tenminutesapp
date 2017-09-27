@@ -4,10 +4,12 @@ import android.databinding.Bindable
 import android.view.View
 import com.adrian.tenminutesapp.BR
 import com.adrian.tenminutesapp.base.BaseViewModel
+import com.adrian.tenminutesapp.pages.tenminutes.dto.FoodType
 import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.dto.OrderSummaryDto
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.model.HomePageModel
 import com.adrian.tenminutesapp.pages.tenminutes.viewmodel.TenMinutesViewModel
+import org.threeten.bp.LocalDateTime
 
 /**
  * Created by cadri on 2017. 09. 21..
@@ -183,6 +185,16 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
         flavoredDressing = checkSelectedState(flavoredDressingCount)
         calculateCurrentCost()
     }
+
+    fun onClickTestSave(view: View) {
+        model.saveSingleCostRegistry(SingleCostRegistry(FoodType.DEFAULT, 1111, LocalDateTime.now()))
+    }
+
+    fun onClickTestFindAll(view: View) {
+        model.findAllSingleCostRegistry()
+    }
+
+
 
     private fun calculateCurrentCost() {
         sumCost = model.calculateCurrentCost(OrderSummaryDto(parseToLongFromEditText(cost), menuACount, menuBCount, flavoredDressingCount)).toString()

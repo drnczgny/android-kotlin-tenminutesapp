@@ -38,6 +38,14 @@ class HomePageModel constructor(val tenMinutesModel: TenMinutesModel, val homePa
         return result
     }
 
+    fun saveSingleCostRegistry(singleCostRegistry: SingleCostRegistry) {
+        tenMinutesModel.saveSingleCostRegistry(singleCostRegistry)
+    }
+
+    fun findAllSingleCostRegistry() {
+        tenMinutesModel.findAllSingleCostRegistry()
+    }
+
     private fun saveBalance(balance: String) {
         val editor = sharedPreferences.edit()
         editor.putString("BALANCE", balance)

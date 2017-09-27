@@ -1,5 +1,6 @@
 package com.adrian.tenminutesapp.pages.tenminutes.di
 
+import com.adrian.tenminutesapp.db.TenMinutesDatabase
 import com.adrian.tenminutesapp.pages.tenminutes.model.TenMinutesModel
 import com.adrian.tenminutesapp.pages.tenminutes.view.TenMinutesActivity
 import com.adrian.tenminutesapp.pages.tenminutes.view.TenMinutesRouter
@@ -28,7 +29,7 @@ class TenMinutesModule {
 
     @ActivityScope
     @Provides
-    fun providesTenMinutesModel() = TenMinutesModel()
+    fun providesTenMinutesModel(database: TenMinutesDatabase) = TenMinutesModel(database)
 
     @ActivityScope
     @Provides
