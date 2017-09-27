@@ -72,8 +72,12 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.11'
     kapt 'com.google.dagger:dagger-android-processor:2.11'
 
-    implementation 'android.arch.persistence.room:runtime:1.0.0-alpha5'
-    kapt 'android.arch.persistence.room:compiler:1.0.0-alpha5'
+    //    implementation 'android.arch.persistence.room:runtime:1.0.0-alpha1'
+//    kapt 'android.arch.persistence.room:compiler:1.0.0-alpha5'
+
+    implementation 'android.arch.persistence.room:runtime:1.0.0-alpha1'
+    implementation 'android.arch.persistence.room:rxjava2:1.0.0-alpha1'
+    kapt "android.arch.persistence.room:compiler:1.0.0-alpha1"
 
     //3rd party
     implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
