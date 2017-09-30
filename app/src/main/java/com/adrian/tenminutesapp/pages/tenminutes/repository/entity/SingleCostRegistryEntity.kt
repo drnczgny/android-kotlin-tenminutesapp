@@ -8,9 +8,10 @@ import android.arch.persistence.room.PrimaryKey
  */
 
 @Entity(tableName = "SingleCostRegistry")
-data class SingleCostRegistryEntity constructor(@PrimaryKey(autoGenerate = true)
-                                           val id: Long,
-                                           val foodType: String,
-                                           val price: Long,
-                                           val dateTime: String) {
+data class SingleCostRegistryEntity constructor(
+        @PrimaryKey(autoGenerate = true)
+        val id: Long,
+        val foodType: String,
+        val price: Long,
+        val dateTime: String) {
 }
