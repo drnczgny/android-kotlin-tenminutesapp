@@ -4,6 +4,7 @@ import com.adrian.tenminutesapp.db.TenMinutesDatabase
 import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.repository.converter.convertSingleCostRegistryToSingleCostRegistryEntity
 import com.adrian.tenminutesapp.pages.tenminutes.repository.entity.SingleCostRegistryEntity
+import org.threeten.bp.LocalDateTime
 import rx.Single
 import rx.schedulers.Schedulers
 
@@ -28,6 +29,14 @@ class RoomDBTenMinutesService constructor(val database: TenMinutesDatabase) : Te
     }
 
     override fun findSingleCostRegistryById(id: Long) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun findSingleCostRegistryByDateTime(dateTime: LocalDateTime) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun findSingleCostRegistryByDateTime(timeInMillis: Long) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
