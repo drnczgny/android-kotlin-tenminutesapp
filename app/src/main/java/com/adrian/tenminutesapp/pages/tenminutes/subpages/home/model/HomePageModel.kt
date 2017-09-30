@@ -8,7 +8,6 @@ import com.adrian.tenminutesapp.pages.tenminutes.model.TenMinutesModel
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.dto.OrderSummaryDto
 import org.threeten.bp.LocalDateTime
 
-
 /**
  * Created by cadri on 2017. 09. 19..
  */

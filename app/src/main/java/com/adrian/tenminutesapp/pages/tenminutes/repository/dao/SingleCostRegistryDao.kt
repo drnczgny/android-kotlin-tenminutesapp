@@ -7,8 +7,6 @@ import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
 import com.adrian.tenminutesapp.pages.tenminutes.repository.entity.SingleCostRegistryEntity
 
-
-
 /**
  * Created by cadri on 2017. 09. 27..
  */
