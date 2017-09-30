@@ -2,6 +2,8 @@ package com.adrian.tenminutesapp.pages.tenminutes.di
 
 import com.adrian.tenminutesapp.db.TenMinutesDatabase
 import com.adrian.tenminutesapp.pages.tenminutes.model.TenMinutesModel
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.service.RoomDBTenMinutesService
+import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.service.TenMinutesService
 import com.adrian.tenminutesapp.pages.tenminutes.view.TenMinutesActivity
 import com.adrian.tenminutesapp.pages.tenminutes.view.TenMinutesRouter
 import com.adrian.tenminutesapp.pages.tenminutes.viewmodel.TenMinutesViewModel
@@ -10,6 +12,7 @@ import com.adrian.tenminutesapp.utils.viewpager.TenMinutesViewPagerDataModel
 import com.adrian.tenminutesapp.utils.viewpager.ViewPagerAdapter
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 
 /**
  * Created by cadri on 2017. 09. 19..
@@ -29,7 +32,13 @@ class TenMinutesModule {
 
     @ActivityScope
     @Provides
-    fun providesTenMinutesModel(database: TenMinutesDatabase) = TenMinutesModel(database)
+    @Named("RoomDBTenMinutesService")
+    fun providesHomePageService(database: TenMinutesDatabase): TenMinutesService = RoomDBTenMinutesService(database)
+
+    @ActivityScope
+    @Provides
+    fun providesTenMinutesModel(@Named("RoomDBTenMinutesService") tenMinutesService: TenMinutesService)
+            = TenMinutesModel(tenMinutesService)
 
     @ActivityScope
     @Provides

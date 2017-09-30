@@ -6,7 +6,6 @@ import com.adrian.tenminutesapp.pages.tenminutes.dto.FoodType
 import com.adrian.tenminutesapp.pages.tenminutes.dto.SingleCostRegistry
 import com.adrian.tenminutesapp.pages.tenminutes.model.TenMinutesModel
 import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.dto.OrderSummaryDto
-import com.adrian.tenminutesapp.pages.tenminutes.subpages.home.service.HomePageService
 import org.threeten.bp.LocalDateTime
 
 
@@ -14,7 +13,9 @@ import org.threeten.bp.LocalDateTime
  * Created by cadri on 2017. 09. 19..
  */
 
-class HomePageModel constructor(val tenMinutesModel: TenMinutesModel, val homePageService: HomePageService, val sharedPreferences: SharedPreferences) {
+class HomePageModel constructor(
+        val tenMinutesModel: TenMinutesModel,
+        val sharedPreferences: SharedPreferences) {
 
     var singleCostRegistryList: MutableList<SingleCostRegistry> = ArrayList()
 
