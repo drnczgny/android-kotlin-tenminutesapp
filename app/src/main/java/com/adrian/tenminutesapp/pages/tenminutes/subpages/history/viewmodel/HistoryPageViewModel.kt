@@ -67,7 +67,7 @@ class HistoryPageViewModel constructor(val router: HistoryPageRouter, val model:
 
     private fun notifyNewCostRegistryAdded(costRegistry: CostRegistry) {
         costRegistryItemViewModels = convertToViewModels(model.costRegistryList)
-//        costRegistryList = tenMinutesModel.provideCostRegistryList().toMutableList()
+//        costRegistryList = tenMinutesModel.getCostRegistryList().toMutableList()
     }
 
     private fun convertToViewModel(costRegistry: CostRegistry): CostRegistryItemViewModel {

@@ -36,7 +36,6 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
             if (cost != value) {
                 field = value
                 notifyPropertyChanged(BR.cost)
-//                notifySumCost()
                 calculateCurrentCost()
             }
         }
@@ -194,7 +193,11 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
         model.findAllSingleCostRegistry()
     }
 
-
+    fun setupBalance(newBalance: String) {
+        balance = parseToLongFromEditText(newBalance)
+        model.updateBalance(balance)
+        uploadBalanceAmount = ""
+    }
 
     private fun calculateCurrentCost() {
         sumCost = model.calculateCurrentCost(OrderSummaryDto(parseToLongFromEditText(cost), menuACount, menuBCount, flavoredDressingCount)).toString()
@@ -202,7 +205,7 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
 
     private fun addNewCost(cost: Long) {
         balance -= cost
-        model.uploadBalance(balance)
+        model.updateBalance(balance)
         val orderSummaryDto = OrderSummaryDto(cost, menuACount, menuBCount, flavoredDressingCount)
         model.saveCostRegistry(orderSummaryDto)
     }
@@ -212,13 +215,8 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
         var uploadAmountWithDiscount = uploadBalanceAmount + discount
         this.balance += uploadAmountWithDiscount
 
-        model.uploadBalance(balance)
+        model.updateBalance(balance)
         this.uploadBalanceAmount = ""
-    }
-
-    private fun notifySumCost() {
-        var currentCost = parseToLongFromEditText(cost)
-        sumCost = (currentCost + summarizeMoreItemCost()).toString()
     }
 
     private fun summarizeMoreItemCost(): Long {
@@ -242,19 +240,8 @@ class HomePageViewModel constructor(val model: HomePageModel) : BaseViewModel() 
         model.singleCostRegistryList.clear()
     }
 
-    fun setupBalance(newBalance: String) {
-        balance = parseToLongFromEditText(newBalance)
-        model.uploadBalance(balance)
-        uploadBalanceAmount = ""
-    }
-
-    private fun parseToLongFromEditText(text: String): Long {
-        return if (!text.equals("")) {
-            text.toLong()
-        } else {
-            0.toLong()
-        }
-    }
+    private fun parseToLongFromEditText(text: String): Long
+            = if (!text.equals("")) text.toLong() else 0
 
     private fun decreaseItemCount(itemCount: Int): Int
             = if (itemCount - 1 >= 0) itemCount - 1 else 0

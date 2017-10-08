@@ -21,11 +21,11 @@ class HomePageModel constructor(
     fun findBalance(): String = sharedPreferences.getString("BALANCE", "")
 
     fun saveCostRegistry(orderSummaryDto: OrderSummaryDto) {
-        setupList(orderSummaryDto)
+        refreshSingleCostRegistryList(orderSummaryDto)
         tenMinutesModel.addCostRegistry(CostRegistry(singleCostRegistryList.toList()))
     }
 
-    fun uploadBalance(balance: Long) {
+    fun updateBalance(balance: Long) {
         saveBalance(balance.toString())
     }
 
@@ -52,7 +52,7 @@ class HomePageModel constructor(
         editor.commit()
     }
 
-    private fun setupList(orderSummaryDto: OrderSummaryDto) {
+    private fun refreshSingleCostRegistryList(orderSummaryDto: OrderSummaryDto) {
         singleCostRegistryList.clear()
         if (orderSummaryDto.typedCost > 0)
             singleCostRegistryList.add(SingleCostRegistry(FoodType.DEFAULT, orderSummaryDto.typedCost, LocalDateTime.now()))

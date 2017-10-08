@@ -31,16 +31,16 @@ class TenMinutesModel constructor(@Named("RoomDBTenMinutesService") val tenMinut
         costRegistryList = testHistory()
     }
 
-    fun provideCostRegistryList() = costRegistryList.toList()
+    fun getCostRegistryList() = costRegistryList.toList()
+
+    fun observeAddNewCostRegistryPublisher(): Observable<CostRegistry>
+            = addNewCostRegistryPublisher
 
     fun addCostRegistry(costRegistry: CostRegistry) {
         costRegistryList.add(0, costRegistry)
         Log.e(logging.TAG, "list: " + costRegistryList.toString())
         addNewCostRegistryPublisher.onNext(costRegistry)
     }
-
-    fun observeAddNewCostRegistryPublisher(): Observable<CostRegistry>
-            = addNewCostRegistryPublisher
 
     fun saveSingleCostRegistry(singleCostRegistry: SingleCostRegistry) {
         tenMinutesService.saveSingleCostRegistry(singleCostRegistry)
@@ -50,7 +50,7 @@ class TenMinutesModel constructor(@Named("RoomDBTenMinutesService") val tenMinut
     fun findAllSingleCostRegistry() {
         tenMinutesService.findAllSingleCostRegistry()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object: Subscriber<List<SingleCostRegistryEntity>>() {
+                .subscribe(object : Subscriber<List<SingleCostRegistryEntity>>() {
                     override fun onCompleted() {
                         // Completed
                     }

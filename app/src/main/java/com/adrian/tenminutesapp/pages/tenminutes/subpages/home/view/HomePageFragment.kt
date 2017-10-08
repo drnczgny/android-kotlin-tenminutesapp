@@ -42,7 +42,7 @@ class HomePageFragment : BaseFragment(), HomePageRouter {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bind(inflater, container)
 
-        setUpuploadBalanceOnLongClickListener()
+        setupUploadBalanceOnLongClickListener()
         return binding.getRoot()
     }
 
@@ -56,7 +56,7 @@ class HomePageFragment : BaseFragment(), HomePageRouter {
         binding?.executePendingBindings()
     }
 
-    private fun setUpuploadBalanceOnLongClickListener() {
+    private fun setupUploadBalanceOnLongClickListener() {
         binding.uploadBalance.setOnLongClickListener(object : View.OnLongClickListener {
             override fun onLongClick(p0: View?): Boolean {
                 viewModel.setupBalance(binding?.uploadBalanceAmount.text.toString());

@@ -19,7 +19,7 @@ class HistoryPageModel constructor(val tenMinutesModel: TenMinutesModel) {
         observeAddNewCostRegistry()
     }
 
-    var costRegistryList: MutableList<CostRegistry> = tenMinutesModel.provideCostRegistryList().toMutableList()
+    var costRegistryList: MutableList<CostRegistry> = tenMinutesModel.getCostRegistryList().toMutableList()
 
     fun observeAddNewCostRegistryPublisher(): Observable<CostRegistry>
             = tenMinutesModel.observeAddNewCostRegistryPublisher()
@@ -42,6 +42,6 @@ class HistoryPageModel constructor(val tenMinutesModel: TenMinutesModel) {
     }
 
     private fun notifyNewCostRegistryAdded(costRegistry: CostRegistry) {
-        costRegistryList = tenMinutesModel.provideCostRegistryList().toMutableList()
+        costRegistryList = tenMinutesModel.getCostRegistryList().toMutableList()
     }
 }
