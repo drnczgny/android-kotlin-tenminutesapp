@@ -39,7 +39,7 @@ class HomePageFragment : BaseFragment(), HomePageRouter {
         viewModel.onCreate()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bind(inflater, container)
 
         setupUploadBalanceOnLongClickListener()

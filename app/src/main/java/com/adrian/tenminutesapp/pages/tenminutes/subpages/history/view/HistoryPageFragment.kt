@@ -40,7 +40,7 @@ class HistoryPageFragment : BaseFragment(), HistoryPageRouter {
         viewModel.onCreate()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         bind(inflater, container)
 //        binding?.rvCostRegistries?.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
         return binding.getRoot()
